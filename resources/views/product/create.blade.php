@@ -15,35 +15,56 @@
                 </label>
                 <input type="text" id="name" name="name"
                     class="
+                    @error('name')
+                        border-red-600
+                    @enderror
              border text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="phone, laptop, etc" />
+                @error('name')
+                    <span class="text-red-600">{{ $message }}</span>
+                @enderror
             </div>
             <div class="mb-5">
                 <label for="price" class="block mb-2 text-sm font-medium text-gray-900">
                     Price
                 </label>
                 <input type="text" id="price" name="price"
-                    class="
+                    class="@error('price')
+                        border-red-600
+                    @enderror
              border text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="kyat" />
+                @error('price')
+                    <span class="text-red-600">{{ $message }}</span>
+                @enderror
             </div>
             <div class="mb-5">
                 <label for="stock" class="block mb-2 text-sm font-medium text-gray-900">
                     Stock
                 </label>
                 <input type="text" id="stock" name="stock"
-                    class="
+                    class="@error('price')
+                        border-red-600
+                    @enderror
              border text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="1,2,3, etc" />
+                @error('stock')
+                    <span class="text-red-600">{{ $message }}</span>
+                @enderror
             </div>
             <div class="mb-5">
                 <label for="description" class="block mb-2 text-sm font-medium text-gray-900">
                     Description
                 </label>
                 <textarea id="description" rows="4" name="description"
-                    class="
+                    class="@error('description')
+                        border-red-600
+                    @enderror
             block p-2.5 w-full text-sm text-gray-900 rounded-lg border focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Leave a comment..."></textarea>
+                @error('description')
+                    <span class="text-red-600">{{ $message }}</span>
+                @enderror
             </div>
             <button type="submit"
                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
