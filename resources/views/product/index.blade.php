@@ -62,7 +62,7 @@
                                 {{ $product->status }}
                             </td>
                             <th class="px-6 py-4">
-                                {{ $product->description }}
+                                {{ Str::limit($product->description, 10, '...') }}
                             </th>
                             <th class="px-6 py-4 flex">
                                 <form action="{{ route('product.destroy', $product->id) }}" method="POST">
