@@ -52,6 +52,46 @@
                     <span class="text-red-600">{{ $message }}</span>
                 @enderror
             </div>
+            <div class="mb-5 flex">
+                <div class="flex items-center me-2">
+                    <input id="available" type="radio" value="available" name="status"
+                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                    <label for="available" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Available
+                    </label>
+                </div>
+                <div class="flex items-center">
+                    <input id="unavailable" type="radio" value="unavailable" name="status"
+                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                    <label for="unavailable" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Unavailable
+                    </label>
+                </div>
+            </div>
+            @error('status')
+                <div class="mb-5">
+                    <span class="text-red-600">{{ $message }}</span>
+                </div>
+            @enderror
+            <div class="mb-5">
+                <label for="category" class="block mb-2 text-sm font-medium text-gray-900">Select a Category
+                </label>
+                <select id="category" name="category_id"
+                    class="
+                    @error('category_id')
+                        border-red-600
+                    @enderror
+                    bg-gray-50 border text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <option value="{{ old('category_id') }}">Choose a Category</option>
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->id }}">
+                            {{ $category->name }}
+                        </option>
+                    @endforeach
+                </select>
+                @error('category_id')
+                    <span class="text-red-600">{{ $message }}</span>
+                @enderror
+                {{-- {{ $categories }} --}}
+            </div>
             <div class="mb-5">
                 <label for="description" class="block mb-2 text-sm font-medium text-gray-900">
                     Description

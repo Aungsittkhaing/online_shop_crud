@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use App\Models\Category;
 use App\Models\Product;
 
 class ProductController extends Controller
@@ -22,7 +23,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('product.create');
+        $categories = Category::all();
+        return view('product.create', compact('categories'));
     }
 
     /**
@@ -30,10 +32,13 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
+        // dd($request->all());
         $product = new Product();
         $product->name = $request->name;
         $product->price = $request->price;
         $product->stock = $request->stock;
+        $product->status = $request->status;
+        $product->category_id = $request->category_id;
         $product->description = $request->description;
         $product->save();
         return redirect()->route('product.index');
@@ -52,7 +57,8 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        return view('product.edit', compact('product'));
+        $categories = Category::all();
+        return view('product.edit', compact('product', 'categories'));
     }
 
     /**
@@ -63,6 +69,8 @@ class ProductController extends Controller
         $product->name = $request->name;
         $product->price = $request->price;
         $product->stock = $request->stock;
+        $product->status = $request->status;
+        $product->category_id = $request->category_id;
         $product->description = $request->description;
         $product->update();
         return redirect()->route('product.index');
