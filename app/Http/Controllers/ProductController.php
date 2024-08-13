@@ -6,12 +6,23 @@ use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Models\Category;
 use App\Models\Product;
+use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        $products = Product::where("name", "LIKE", "%{$query}%")
+            ->orWhere("price", "LIKE", "%{$query}%")
+            ->orWhere("stock", "LIKE", "%{$query}%")
+            ->orWhere("status", "LIKE", "%{$query}%")
+            ->paginate(5);
+        return view('product.index', compact('products'));
+    }
     public function index()
     {
         $products = Product::paginate(5);
@@ -49,7 +60,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        return view('product.detail', compact('product'));
     }
 
     /**

@@ -11,3 +11,5 @@ Route::get('/', function () {
 Route::resource('category', CategoryController::class);
 //product
 Route::resource('product', ProductController::class);
+//search
+Route::get('search', [ProductController::class, 'search'])->name('product.search');
