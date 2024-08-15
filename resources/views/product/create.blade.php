@@ -43,7 +43,7 @@
                     Stock
                 </label>
                 <input type="text" id="stock" name="stock"
-                    class="@error('price')
+                    class="@error('stock')
                         border-red-600
                     @enderror
              border text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500"
