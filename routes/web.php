@@ -16,3 +16,4 @@ Route::resource('product', ProductController::class);
 Route::get('search', [ProductController::class, 'search'])->name('product.search');
 //customer
 Route::resource('customer', CustomerController::class);
+Route::get('search', [CustomerController::class, 'search'])->name('customer.search');

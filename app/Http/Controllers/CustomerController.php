@@ -5,12 +5,22 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCustomerRequest;
 use App\Http\Requests\UpdateCustomerRequest;
 use App\Models\Customer;
+use Illuminate\Http\Request;
 
 class CustomerController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        $customers = Customer::where("name", "LIKE", "%{$query}%")
+            ->orWhere("phone", "LIKE", "%{$query}%")
+            ->orWhere("email", "LIKE", "%{$query}%")
+            ->paginate(5);
+        return view('customer.index', compact('customers'));
+    }
     public function index()
     {
         $customers = Customer::paginate(5);
