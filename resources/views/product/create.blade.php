@@ -4,7 +4,7 @@
 @endsection
 @section('content')
     <div class="w-full max-w-md mx-auto bg-white shadow-lg rounded-lg p-8">
-        <form class="max-w-sm mx-auto" action="{{ route('product.store') }}" method="POST">
+        <form class="max-w-sm mx-auto" action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="mb-5">
                 <h1 class="text-center text-2xl">Create Product</h1>
@@ -91,6 +91,19 @@
                     <span class="text-red-600">{{ $message }}</span>
                 @enderror
                 {{-- {{ $categories }} --}}
+            </div>
+            <div class="mb-5">
+                <label for="image" class="block mb-2 text-sm font-medium text-gray-900">
+                    Image
+                </label>
+                <input type="file" id="image" name="image"
+                    class="@error('image')
+                        border-red-600
+                    @enderror
+             border text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                @error('image')
+                    <span class="text-red-600">{{ $message }}</span>
+                @enderror
             </div>
             <div class="mb-5">
                 <label for="description" class="block mb-2 text-sm font-medium text-gray-900">

@@ -4,7 +4,8 @@
 @endsection
 @section('content')
     <div class="w-full max-w-md mx-auto bg-white shadow-lg rounded-lg p-8">
-        <form class="max-w-sm mx-auto" action="{{ route('product.update', $product->id) }}" method="POST">
+        <form class="max-w-sm mx-auto" action="{{ route('product.update', $product->id) }}" method="POST"
+            enctype="multipart/form-data">
             @csrf
             @method('put')
             <div class="mb-5">
@@ -94,6 +95,20 @@
                     <span class="text-red-600">{{ $message }}</span>
                 @enderror
                 {{-- {{ $categories }} --}}
+            </div>
+            <div class="mb-5">
+                <label for="image" class="block mb-2 text-sm font-medium text-gray-900">
+                    Image
+                </label>
+                <img src="{{ asset('storage/productImage/' . $product->image) }}" width="100px" height="100px">
+                <input type="file" id="image" name="image"
+                    class="@error('image')
+                        border-red-600
+                    @enderror
+             border text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                @error('image')
+                    <span class="text-red-600">{{ $message }}</span>
+                @enderror
             </div>
             <div class="mb-5">
                 <label for="description" class="block mb-2 text-sm font-medium text-gray-900">

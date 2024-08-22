@@ -43,6 +43,11 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
+        if ($request->image) {
+            $file = $request->image;
+            $newImg = "product_image" . uniqid() . "." . $file->extension();
+            $file->storeAs("public/productImage", $newImg);
+        }
         // dd($request->all());
         $product = new Product();
         $product->name = $request->name;
@@ -51,6 +56,7 @@ class ProductController extends Controller
         $product->status = $request->status;
         $product->category_id = $request->category_id;
         $product->description = $request->description;
+        $product->image = $newImg;
         $product->save();
         return redirect()->route('product.index');
     }
@@ -83,6 +89,12 @@ class ProductController extends Controller
         $product->status = $request->status;
         $product->category_id = $request->category_id;
         $product->description = $request->description;
+        if ($request->image) {
+            $file = $request->image;
+            $newImg = "product_image" . uniqid() . "." . $file->extension();
+            $file->storeAs("public/productImage", $newImg);
+            $product->image = $newImg;
+        }
         $product->update();
         return redirect()->route('product.index');
     }

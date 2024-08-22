@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,4 +17,7 @@ Route::resource('product', ProductController::class);
 Route::get('search', [ProductController::class, 'search'])->name('product.search');
 //customer
 Route::resource('customer', CustomerController::class);
-Route::get('search', [CustomerController::class, 'search'])->name('customer.search');
+
+Route::get('searchCustomer', [CustomerController::class, 'search'])->name('customer.search');
+
+Route::resource('post', PostController::class);

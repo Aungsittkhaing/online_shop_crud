@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCustomerRequest;
 use App\Http\Requests\UpdateCustomerRequest;
 use App\Models\Customer;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
@@ -23,8 +24,9 @@ class CustomerController extends Controller
     }
     public function index()
     {
-        $customers = Customer::paginate(5);
-        return view('customer.index', compact('customers'));
+        $customers = Customer::find(2);
+        // return view('customer.index', compact('customers'));
+        return $customers->posts()->get();
     }
 
     /**
@@ -32,7 +34,8 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        return view('customer.create');
+        $posts = Post::all();
+        return view('customer.create', compact('posts'));
     }
 
     /**
@@ -45,6 +48,7 @@ class CustomerController extends Controller
         $customer->phone = $request->phone;
         $customer->email = $request->email;
         $customer->save();
+        $customer->posts()->attach($request->post_ids);
         return redirect()->route('customer.index');
     }
 
