@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateCustomerRequest;
 use App\Models\Customer;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class CustomerController extends Controller
 {
@@ -24,9 +25,9 @@ class CustomerController extends Controller
     }
     public function index()
     {
-        $customers = Customer::find(2);
-        // return view('customer.index', compact('customers'));
-        return $customers->posts()->get();
+        $customers = Customer::paginate(4);
+        return view('customer.index', compact('customers'));
+        // return $customers->posts()->get();
     }
 
     /**
@@ -34,8 +35,9 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        $posts = Post::all();
-        return view('customer.create', compact('posts'));
+        // $posts = Post::all();
+        $customer = Customer::all();
+        return view('customer.create', compact('customer'));
     }
 
     /**
@@ -47,8 +49,9 @@ class CustomerController extends Controller
         $customer->name = $request->name;
         $customer->phone = $request->phone;
         $customer->email = $request->email;
+        $customer->password = Hash::make($request->password);
         $customer->save();
-        $customer->posts()->attach($request->post_ids);
+        // $customer->posts()->attach($request->post_ids);
         return redirect()->route('customer.index');
     }
 
@@ -76,6 +79,7 @@ class CustomerController extends Controller
         $customer->name = $request->name;
         $customer->phone = $request->phone;
         $customer->email = $request->email;
+        $customer->password = Hash::make($request->password);
         $customer->update();
         return redirect()->route('customer.index');
     }

@@ -52,13 +52,27 @@
                     <span class="text-red-600">{{ $message }}</span>
                 @enderror
             </div>
-            @foreach ($posts as $post)
+            <div class="mb-5">
+                <label for="password" class="block mb-2 text-sm font-medium text-gray-900">
+                    Password
+                </label>
+                <input type="password" id="password" name="password"
+                    class="@error('password')
+                    border-red-600
+                @enderror
+         border text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="1,2,3, etc" />
+                @error('password')
+                    <span class="text-red-600">{{ $message }}</span>
+                @enderror
+            </div>
+            {{-- @foreach ($posts as $post)
                 <div class="flex items-center mb-2">
                     <input id="post_id" type="checkbox" value="{{ $post->id }}" name="post_ids[]"
                         class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                     <label for="posts" class="ms-2 text-sm font-medium text-gray-900">{{ $post->title }}
                 </div>
-            @endforeach
+            @endforeach --}}
             <button type="submit"
                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
         </form>

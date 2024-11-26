@@ -25,7 +25,8 @@ class UpdateCustomerRequest extends FormRequest
         return [
             "name" => "required|min:3|string|",
             "phone" => "required|numeric|unique:customers,phone,$id",
-            "email" => "required|string|unique:customers,email,$id"
+            "email" => "required|string|unique:customers,email,$id",
+            'password' => 'required|string|min:8'
         ];
     }
 }
